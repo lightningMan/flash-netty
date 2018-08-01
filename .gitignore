@@ -106,5 +106,7 @@ fabric.properties
 
 .idea/
 blog/
-netty-study.iml
+flash-netty.iml
 target/
+src/main/resources/
+src/test/
