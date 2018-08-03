@@ -32,7 +32,6 @@ public class NettyServer {
                 .attr(AttributeKey.newInstance("serverName"), "nettyServer")
                 .childAttr(clientKey, "clientValue")
                 .option(ChannelOption.SO_BACKLOG, 1024)
-                .childOption(ChannelOption.SO_REUSEADDR, false)
                 .childOption(ChannelOption.SO_KEEPALIVE, true)
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
