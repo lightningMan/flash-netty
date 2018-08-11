@@ -7,6 +7,19 @@
     <groupId>the.flash</groupId>
     <artifactId>flash-netty</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <netty-all.version>4.1.6.Final</netty-all.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty-all.version}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -21,11 +34,4 @@
     </build>
 
 
-    <dependencies>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.6.Final</version>
-        </dependency>
-    </dependencies>
 </project>
