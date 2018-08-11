@@ -108,5 +108,3 @@ fabric.properties
 blog/
 flash-netty.iml
 target/
-src/main/resources/
-src/test/
