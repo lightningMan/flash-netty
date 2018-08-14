@@ -32,7 +32,7 @@ public class NettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     public void initChannel(SocketChannel ch) {
-                        ch.pipeline().addLast(new FirstClientHandler());
+                        ch.pipeline().addLast(new ClientHandler());
                     }
                 });
 
@@ -42,7 +42,7 @@ public class NettyClient {
     private static void connect(Bootstrap bootstrap, String host, int port, int retry) {
         bootstrap.connect(host, port).addListener(future -> {
             if (future.isSuccess()) {
-                System.out.println("连接成功!");
+                System.out.println(new Date() + ": 连接成功!");
             } else if (retry == 0) {
                 System.err.println("重试次数已用完，放弃连接！");
             } else {
