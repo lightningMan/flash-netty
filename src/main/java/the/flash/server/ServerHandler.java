@@ -6,7 +6,9 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import the.flash.protocol.Packet;
 import the.flash.protocol.PacketCodeC;
 import the.flash.protocol.request.LoginRequestPacket;
+import the.flash.protocol.request.MessageRequestPacket;
 import the.flash.protocol.response.LoginResponsePacket;
+import the.flash.protocol.response.MessageResponsePacket;
 
 import java.util.Date;
 
@@ -19,12 +21,12 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        System.out.println(new Date() + ": 客户端开始登录……");
         ByteBuf requestByteBuf = (ByteBuf) msg;
 
         Packet packet = PacketCodeC.INSTANCE.decode(requestByteBuf);
 
         if (packet instanceof LoginRequestPacket) {
+            System.out.println(new Date() + ": 收到客户端登录请求……");
             // 登录流程
             LoginRequestPacket loginRequestPacket = (LoginRequestPacket) packet;
 
@@ -40,6 +42,15 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
             }
             // 登录响应
             ByteBuf responseByteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc(), loginResponsePacket);
+            ctx.channel().writeAndFlush(responseByteBuf);
+        } else if (packet instanceof MessageRequestPacket) {
+            // 客户端发来消息
+            MessageRequestPacket messageRequestPacket = ((MessageRequestPacket) packet);
+
+            MessageResponsePacket messageResponsePacket = new MessageResponsePacket();
+            System.out.println(new Date() + ": 收到客户端消息: " + messageRequestPacket.getMessage());
+            messageResponsePacket.setMessage("服务端回复【" + messageRequestPacket.getMessage() + "】");
+            ByteBuf responseByteBuf = PacketCodeC.INSTANCE.encode(ctx.alloc(), messageResponsePacket);
             ctx.channel().writeAndFlush(responseByteBuf);
         }
     }

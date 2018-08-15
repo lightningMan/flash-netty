@@ -3,15 +3,16 @@ package the.flash.protocol;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import the.flash.protocol.request.LoginRequestPacket;
+import the.flash.protocol.request.MessageRequestPacket;
 import the.flash.protocol.response.LoginResponsePacket;
+import the.flash.protocol.response.MessageResponsePacket;
 import the.flash.serialize.Serializer;
 import the.flash.serialize.impl.JSONSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static the.flash.protocol.command.Command.LOGIN_REQUEST;
-import static the.flash.protocol.command.Command.LOGIN_RESPONSE;
+import static the.flash.protocol.command.Command.*;
 
 public class PacketCodeC {
 
@@ -26,6 +27,8 @@ public class PacketCodeC {
         packetTypeMap = new HashMap<>();
         packetTypeMap.put(LOGIN_REQUEST, LoginRequestPacket.class);
         packetTypeMap.put(LOGIN_RESPONSE, LoginResponsePacket.class);
+        packetTypeMap.put(MESSAGE_REQUEST, MessageRequestPacket.class);
+        packetTypeMap.put(MESSAGE_RESPONSE, MessageResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
