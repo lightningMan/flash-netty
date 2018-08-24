@@ -9,6 +9,10 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import the.flash.client.handler.LoginResponseHandler;
+import the.flash.client.handler.MessageResponseHandler;
+import the.flash.codec.PacketDecoder;
+import the.flash.codec.PacketEncoder;
 import the.flash.protocol.PacketCodeC;
 import the.flash.protocol.request.MessageRequestPacket;
 import the.flash.util.LoginUtil;
@@ -39,7 +43,10 @@ public class NettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     public void initChannel(SocketChannel ch) {
-                        ch.pipeline().addLast(new ClientHandler());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginResponseHandler());
+                        ch.pipeline().addLast(new MessageResponseHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
 

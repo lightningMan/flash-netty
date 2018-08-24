@@ -6,12 +6,10 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import the.flash.server.handler.inbound.InBoundHandlerA;
-import the.flash.server.handler.inbound.InBoundHandlerB;
-import the.flash.server.handler.inbound.InBoundHandlerC;
-import the.flash.server.handler.outbound.OutBoundHandlerA;
-import the.flash.server.handler.outbound.OutBoundHandlerB;
-import the.flash.server.handler.outbound.OutBoundHandlerC;
+import the.flash.codec.PacketDecoder;
+import the.flash.codec.PacketEncoder;
+import the.flash.server.handler.LoginRequestHandler;
+import the.flash.server.handler.MessageRequestHandler;
 
 import java.util.Date;
 
@@ -32,15 +30,10 @@ public class NettyServer {
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
-                        // inBound，处理读数据的逻辑链
-                        ch.pipeline().addLast(new InBoundHandlerA());
-                        ch.pipeline().addLast(new InBoundHandlerB());
-                        ch.pipeline().addLast(new InBoundHandlerC());
-
-                        // outBound，处理写数据的逻辑链
-                        ch.pipeline().addLast(new OutBoundHandlerA());
-                        ch.pipeline().addLast(new OutBoundHandlerB());
-                        ch.pipeline().addLast(new OutBoundHandlerC());
+                        ch.pipeline().addLast(new PacketDecoder());
+                        ch.pipeline().addLast(new LoginRequestHandler());
+                        ch.pipeline().addLast(new MessageRequestHandler());
+                        ch.pipeline().addLast(new PacketEncoder());
                     }
                 });
 
