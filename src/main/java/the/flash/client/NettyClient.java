@@ -1,7 +1,6 @@
 package the.flash.client;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -13,7 +12,6 @@ import the.flash.client.handler.LoginResponseHandler;
 import the.flash.client.handler.MessageResponseHandler;
 import the.flash.codec.PacketDecoder;
 import the.flash.codec.PacketEncoder;
-import the.flash.protocol.PacketCodeC;
 import the.flash.protocol.request.MessageRequestPacket;
 import the.flash.util.LoginUtil;
 
@@ -81,10 +79,7 @@ public class NettyClient {
                     Scanner sc = new Scanner(System.in);
                     String line = sc.nextLine();
 
-                    MessageRequestPacket packet = new MessageRequestPacket();
-                    packet.setMessage(line);
-                    ByteBuf byteBuf = PacketCodeC.INSTANCE.encode(channel.alloc(), packet);
-                    channel.writeAndFlush(byteBuf);
+                    channel.writeAndFlush(new MessageRequestPacket(line));
                 }
             }
         }).start();
