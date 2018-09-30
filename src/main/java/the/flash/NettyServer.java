@@ -1,8 +1,6 @@
 package the.flash;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -23,12 +21,6 @@ public class NettyServer {
         serverBootstrap
                 .group(boosGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)
-                .handler(new ChannelInboundHandlerAdapter() {
-                    @Override
-                    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-                        super.channelActive(ctx);
-                    }
-                })
                 .attr(AttributeKey.newInstance("serverName"), "nettyServer")
                 .childAttr(clientKey, "clientValue")
                 .option(ChannelOption.SO_BACKLOG, 1024)
