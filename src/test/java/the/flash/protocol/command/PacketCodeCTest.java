@@ -10,8 +10,6 @@ import the.flash.protocol.request.LoginRequestPacket;
 import the.flash.serialize.Serializer;
 import the.flash.serialize.impl.JSONSerializer;
 
-import java.util.UUID;
-
 public class PacketCodeCTest {
     @Test
     public void encode() {
@@ -20,8 +18,7 @@ public class PacketCodeCTest {
         LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
 
         loginRequestPacket.setVersion(((byte) 1));
-        loginRequestPacket.setUserId(UUID.randomUUID().toString());
-        loginRequestPacket.setUsername("zhangsan");
+        loginRequestPacket.setUserName("zhangsan");
         loginRequestPacket.setPassword("password");
 
         PacketCodeC packetCodeC = PacketCodeC.INSTANCE;
