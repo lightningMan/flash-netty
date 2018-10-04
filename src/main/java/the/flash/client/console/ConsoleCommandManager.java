@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ConsoleManager implements ConsoleCommand {
+public class ConsoleCommandManager implements ConsoleCommand {
     private Map<String, ConsoleCommand> consoleCommandMap;
 
-    public ConsoleManager() {
+    public ConsoleCommandManager() {
         consoleCommandMap = new HashMap<>();
         consoleCommandMap.put("sendToUser", new SendToUserConsoleCommand());
         consoleCommandMap.put("logout", new LogoutConsoleCommand());

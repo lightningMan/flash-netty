@@ -8,7 +8,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import the.flash.client.console.ConsoleManager;
+import the.flash.client.console.ConsoleCommandManager;
 import the.flash.client.console.LoginConsoleCommand;
 import the.flash.client.handler.CreateGroupResponseHandler;
 import the.flash.client.handler.LoginResponseHandler;
@@ -77,7 +77,7 @@ public class NettyClient {
     }
 
     private static void startConsoleThread(Channel channel) {
-        ConsoleManager consoleManager = new ConsoleManager();
+        ConsoleCommandManager consoleCommandManager = new ConsoleCommandManager();
         LoginConsoleCommand loginConsoleCommand = new LoginConsoleCommand();
         Scanner scanner = new Scanner(System.in);
 
@@ -86,7 +86,7 @@ public class NettyClient {
                 if (!SessionUtil.hasLogin(channel)) {
                     loginConsoleCommand.exec(scanner, channel);
                 } else {
-                    consoleManager.exec(scanner, channel);
+                    consoleCommandManager.exec(scanner, channel);
                 }
             }
         }).start();
