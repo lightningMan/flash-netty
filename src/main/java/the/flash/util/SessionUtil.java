@@ -17,8 +17,8 @@ public class SessionUtil {
 
     public static void unBindSession(Channel channel) {
         if (hasLogin(channel)) {
-            channel.attr(Attributes.SESSION).set(null);
             userIdChannelMap.remove(getSession(channel).getUserId());
+            channel.attr(Attributes.SESSION).set(null);
         }
     }
 
