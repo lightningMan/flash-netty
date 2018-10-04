@@ -17,14 +17,16 @@ public class SessionUtil {
 
     public static void unBindSession(Channel channel) {
         if (hasLogin(channel)) {
-            userIdChannelMap.remove(getSession(channel).getUserId());
+            Session session = getSession(channel);
+            userIdChannelMap.remove(session.getUserId());
             channel.attr(Attributes.SESSION).set(null);
+            System.out.println(session + " 退出登录!");
         }
     }
 
     public static boolean hasLogin(Channel channel) {
 
-        return channel.hasAttr(Attributes.SESSION);
+        return getSession(channel) != null;
     }
 
     public static Session getSession(Channel channel) {

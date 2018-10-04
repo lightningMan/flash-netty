@@ -2,13 +2,13 @@ package the.flash.serialize.impl;
 
 import com.alibaba.fastjson.JSON;
 import the.flash.serialize.Serializer;
-import the.flash.serialize.SerializerAlogrithm;
+import the.flash.serialize.SerializerAlgorithm;
 
 public class JSONSerializer implements Serializer {
 
     @Override
-    public byte getSerializerAlogrithm() {
-        return SerializerAlogrithm.JSON;
+    public byte getSerializerAlgorithm() {
+        return SerializerAlgorithm.JSON;
     }
 
     @Override

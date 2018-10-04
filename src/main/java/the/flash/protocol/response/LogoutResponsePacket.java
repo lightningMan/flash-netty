@@ -3,13 +3,10 @@ package the.flash.protocol.response;
 import lombok.Data;
 import the.flash.protocol.Packet;
 
-import static the.flash.protocol.command.Command.LOGIN_RESPONSE;
+import static the.flash.protocol.command.Command.LOGOUT_RESPONSE;
 
 @Data
-public class LoginResponsePacket extends Packet {
-    private String userId;
-
-    private String userName;
+public class LogoutResponsePacket extends Packet {
 
     private boolean success;
 
@@ -19,6 +16,6 @@ public class LoginResponsePacket extends Packet {
     @Override
     public Byte getCommand() {
 
-        return LOGIN_RESPONSE;
+        return LOGOUT_RESPONSE;
     }
 }

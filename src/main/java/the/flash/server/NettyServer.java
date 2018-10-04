@@ -8,9 +8,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import the.flash.codec.PacketDecoder;
 import the.flash.codec.PacketEncoder;
-import the.flash.server.handler.AuthHandler;
-import the.flash.server.handler.LoginRequestHandler;
-import the.flash.server.handler.MessageRequestHandler;
+import the.flash.server.handler.*;
 
 import java.util.Date;
 
@@ -35,6 +33,8 @@ public class NettyServer {
                         ch.pipeline().addLast(new LoginRequestHandler());
                         ch.pipeline().addLast(new AuthHandler());
                         ch.pipeline().addLast(new MessageRequestHandler());
+                        ch.pipeline().addLast(new CreateGroupRequestHandler());
+                        ch.pipeline().addLast(new LogoutRequestHandler());
                         ch.pipeline().addLast(new PacketEncoder());
                     }
                 });

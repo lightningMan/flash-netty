@@ -1,6 +1,6 @@
 package the.flash.serialize;
 
-public interface SerializerAlogrithm {
+public interface SerializerAlgorithm {
     /**
      * json 序列化
      */
