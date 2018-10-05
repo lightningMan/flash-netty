@@ -8,6 +8,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import the.flash.codec.PacketDecoder;
 import the.flash.codec.PacketEncoder;
+import the.flash.codec.Spliter;
 import the.flash.server.handler.LifeCyCleTestHandler;
 import the.flash.server.handler.LoginRequestHandler;
 import the.flash.server.handler.MessageRequestHandler;
@@ -31,6 +32,7 @@ public class NettyServer {
                 .childOption(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
+                        ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new LifeCyCleTestHandler());
                         ch.pipeline().addLast(new PacketDecoder());
                         ch.pipeline().addLast(new LoginRequestHandler());
