@@ -5,12 +5,12 @@ import io.netty.buffer.ByteBufAllocator;
 import org.junit.Assert;
 import org.junit.Test;
 import the.flash.protocol.Packet;
-import the.flash.protocol.PacketCodeC;
+import the.flash.protocol.PacketCodec;
 import the.flash.protocol.request.LoginRequestPacket;
 import the.flash.serialize.Serializer;
 import the.flash.serialize.impl.JSONSerializer;
 
-public class PacketCodeCTest {
+public class PacketCodecTest {
     @Test
     public void encode() {
 
@@ -21,11 +21,11 @@ public class PacketCodeCTest {
         loginRequestPacket.setUserName("zhangsan");
         loginRequestPacket.setPassword("password");
 
-        PacketCodeC packetCodeC = PacketCodeC.INSTANCE;
+        PacketCodec packetCodec = PacketCodec.INSTANCE;
         ByteBuf byteBuf = ByteBufAllocator.DEFAULT.ioBuffer();
 
-        packetCodeC.encode(byteBuf, loginRequestPacket);
-        Packet decodedPacket = packetCodeC.decode(byteBuf);
+        packetCodec.encode(byteBuf, loginRequestPacket);
+        Packet decodedPacket = packetCodec.decode(byteBuf);
 
         Assert.assertArrayEquals(serializer.serialize(loginRequestPacket), serializer.serialize(decodedPacket));
 
