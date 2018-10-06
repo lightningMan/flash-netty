@@ -14,6 +14,7 @@ import the.flash.client.handler.*;
 import the.flash.codec.PacketDecoder;
 import the.flash.codec.PacketEncoder;
 import the.flash.codec.Spliter;
+import the.flash.server.handler.GroupMessageRequestHandler;
 import the.flash.util.SessionUtil;
 
 import java.util.Date;
@@ -56,6 +57,8 @@ public class NettyClient {
                         ch.pipeline().addLast(new QuitGroupResponseHandler());
                         // 获取群成员响应处理器
                         ch.pipeline().addLast(new ListGroupMembersResponseHandler());
+                        // 群消息响应
+                        ch.pipeline().addLast(new GroupMessageResponseHandler());
                         // 登出响应处理器
                         ch.pipeline().addLast(new LogoutResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());

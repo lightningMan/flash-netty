@@ -6,8 +6,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import the.flash.codec.PacketDecoder;
-import the.flash.codec.PacketEncoder;
+import the.flash.codec.PacketCodecHandler;
 import the.flash.codec.Spliter;
 import the.flash.server.handler.*;
 
@@ -31,23 +30,10 @@ public class NettyServer {
                 .childHandler(new ChannelInitializer<NioSocketChannel>() {
                     protected void initChannel(NioSocketChannel ch) {
                         ch.pipeline().addLast(new Spliter());
-                        ch.pipeline().addLast(new PacketDecoder());
-                        // 登录请求处理器
-                        ch.pipeline().addLast(new LoginRequestHandler());
-                        ch.pipeline().addLast(new AuthHandler());
-                        // 单聊消息请求处理器
-                        ch.pipeline().addLast(new MessageRequestHandler());
-                        // 创建群请求处理器
-                        ch.pipeline().addLast(new CreateGroupRequestHandler());
-                        // 加群请求处理器
-                        ch.pipeline().addLast(new JoinGroupRequestHandler());
-                        // 退群请求处理器
-                        ch.pipeline().addLast(new QuitGroupRequestHandler());
-                        // 获取群成员请求处理器
-                        ch.pipeline().addLast(new ListGroupMembersRequestHandler());
-                        // 登出请求处理器
-                        ch.pipeline().addLast(new LogoutRequestHandler());
-                        ch.pipeline().addLast(new PacketEncoder());
+                        ch.pipeline().addLast(PacketCodecHandler.INSTANCE);
+                        ch.pipeline().addLast(LoginRequestHandler.INSTANCE);
+                        ch.pipeline().addLast(AuthHandler.INSTANCE);
+                        ch.pipeline().addLast(IMHandler.INSTANCE);
                     }
                 });
 

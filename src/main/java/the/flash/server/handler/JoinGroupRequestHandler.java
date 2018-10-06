@@ -1,5 +1,6 @@
 package the.flash.server.handler;
 
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.ChannelGroup;
@@ -7,7 +8,14 @@ import the.flash.protocol.request.JoinGroupRequestPacket;
 import the.flash.protocol.response.JoinGroupResponsePacket;
 import the.flash.util.SessionUtil;
 
+@ChannelHandler.Sharable
 public class JoinGroupRequestHandler extends SimpleChannelInboundHandler<JoinGroupRequestPacket> {
+    public static final JoinGroupRequestHandler INSTANCE = new JoinGroupRequestHandler();
+
+    private JoinGroupRequestHandler() {
+
+    }
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, JoinGroupRequestPacket requestPacket) {
         // 1. 获取群对应的 channelGroup，然后将当前用户的 channel 添加进去
@@ -20,6 +28,6 @@ public class JoinGroupRequestHandler extends SimpleChannelInboundHandler<JoinGro
 
         responsePacket.setSuccess(true);
         responsePacket.setGroupId(groupId);
-        ctx.channel().writeAndFlush(responsePacket);
+        ctx.writeAndFlush(responsePacket);
     }
 }
