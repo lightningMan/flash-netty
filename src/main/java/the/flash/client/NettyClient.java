@@ -14,7 +14,7 @@ import the.flash.client.handler.*;
 import the.flash.codec.PacketDecoder;
 import the.flash.codec.PacketEncoder;
 import the.flash.codec.Spliter;
-import the.flash.server.handler.GroupMessageRequestHandler;
+import the.flash.handler.IMIdleStateHandler;
 import the.flash.util.SessionUtil;
 
 import java.util.Date;
@@ -43,6 +43,9 @@ public class NettyClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     public void initChannel(SocketChannel ch) {
+                        // 空闲检测
+                        ch.pipeline().addLast(new IMIdleStateHandler());
+
                         ch.pipeline().addLast(new Spliter());
                         ch.pipeline().addLast(new PacketDecoder());
                         // 登录响应处理器
@@ -62,6 +65,9 @@ public class NettyClient {
                         // 登出响应处理器
                         ch.pipeline().addLast(new LogoutResponseHandler());
                         ch.pipeline().addLast(new PacketEncoder());
+
+                        // 心跳定时器
+                        ch.pipeline().addLast(new HeartBeatTimerHandler());
                     }
                 });
 
