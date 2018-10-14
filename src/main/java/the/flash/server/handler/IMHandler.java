@@ -19,7 +19,6 @@ public class IMHandler extends SimpleChannelInboundHandler<Packet> {
     private IMHandler() {
         handlerMap = new HashMap<>();
 
-        handlerMap.put(LOGIN_REQUEST, LoginRequestHandler.INSTANCE);
         handlerMap.put(MESSAGE_REQUEST, MessageRequestHandler.INSTANCE);
         handlerMap.put(CREATE_GROUP_REQUEST, CreateGroupRequestHandler.INSTANCE);
         handlerMap.put(JOIN_GROUP_REQUEST, JoinGroupRequestHandler.INSTANCE);
