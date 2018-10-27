@@ -14,7 +14,6 @@ import the.flash.client.handler.*;
 import the.flash.codec.PacketDecoder;
 import the.flash.codec.PacketEncoder;
 import the.flash.codec.Spliter;
-import the.flash.server.handler.GroupMessageRequestHandler;
 import the.flash.util.SessionUtil;
 
 import java.util.Date;
