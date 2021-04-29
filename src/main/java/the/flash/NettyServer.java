@@ -13,20 +13,21 @@ public class NettyServer {
     private static final int BEGIN_PORT = 8000;
 
     public static void main(String[] args) {
-        NioEventLoopGroup boosGroup = new NioEventLoopGroup();
+        NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
 
         final ServerBootstrap serverBootstrap = new ServerBootstrap();
         final AttributeKey<Object> clientKey = AttributeKey.newInstance("clientKey");
         serverBootstrap
-                .group(boosGroup, workerGroup)
-                .channel(NioServerSocketChannel.class)
-                .attr(AttributeKey.newInstance("serverName"), "nettyServer")
-                .childAttr(clientKey, "clientValue")
+                .group(bossGroup, workerGroup)
+                .channel(NioServerSocketChannel.class)//指定 IO 模型
+                .attr(AttributeKey.newInstance("serverName"), "nettyServer")//NioServerSocketChannel指定一些自定义属性，然后我们可以通过channel.attr()取出这个属性
+                .childAttr(clientKey, "clientValue")//childAttr可以给每一条连接指定自定义属性，然后后续我们可以通过channel.attr()取出该属性
                 .option(ChannelOption.SO_BACKLOG, 1024)
-                .childOption(ChannelOption.SO_KEEPALIVE, true)
+                .childOption(ChannelOption.SO_KEEPALIVE, true)//childOption()可以给每条连接设置一些TCP底层相关的属性
                 .childOption(ChannelOption.TCP_NODELAY, true)
-                .childHandler(new ChannelInitializer<NioSocketChannel>() {
+                //handler()用于指定在服务端启动过程中的一些逻辑
+                .childHandler(new ChannelInitializer<NioSocketChannel>() {//定义后续每条连接的数据读写
                     protected void initChannel(NioSocketChannel ch) {
                         System.out.println(ch.attr(clientKey).get());
                     }
