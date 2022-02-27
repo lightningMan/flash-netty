@@ -5,8 +5,43 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>the.flash</groupId>
-    <artifactId>netty-study</artifactId>
+    <artifactId>flash-netty</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <netty-all.version>4.1.6.Final</netty-all.version>
+        <lombok.version>1.16.12</lombok.version>
+        <fastjson.version>1.2.29</fastjson.version>
+        <junit.version>4.12</junit.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty-all.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -21,11 +56,4 @@
     </build>
 
 
-    <dependencies>
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.6.Final</version>
-        </dependency>
-    </dependencies>
 </project>
