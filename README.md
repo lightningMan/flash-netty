@@ -10,6 +10,7 @@ master 为项目全量代码，建议读者根据章节顺序，切换到每个�
 
 ## 更多精彩
 更多源码阅读技巧相关的文章，欢迎关注 《闪电侠的博客》
-<img width="453" alt="image" src="https://user-images.githubusercontent.com/1680506/155873984-e6ebb44c-42f6-410b-b920-ab96258958c1.png">
+![1](https://user-images.githubusercontent.com/1680506/155874051-19d06803-6887-41ac-91ad-f1b01f1ac562.jpg)
+
 
 <img width="465" alt="image" src="https://user-images.githubusercontent.com/1680506/155873995-cee9ace0-7ef8-4296-b586-46c748d0b0d8.png">
