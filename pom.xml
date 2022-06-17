@@ -11,7 +11,7 @@
     <properties>
         <netty-all.version>4.1.6.Final</netty-all.version>
         <lombok.version>1.16.12</lombok.version>
-        <fastjson.version>1.2.29</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <junit.version>4.12</junit.version>
     </properties>
 
